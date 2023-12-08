@@ -59,8 +59,7 @@ class Product(models.Model):
         default=1,
         verbose_name='Category'
     )
-    description = models.CharField(
-        max_length=250,
+    description = models.TextField(
         default='',
         blank=True,
         null=True,
