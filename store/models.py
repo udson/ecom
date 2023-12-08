@@ -69,6 +69,18 @@ class Product(models.Model):
         upload_to='uploads/product',
         verbose_name='Image'
     )
+    is_sale = models.BooleanField(
+        default=False,
+        verbose_name='Is on sale'
+    )
+    sale_price = models.DecimalField(
+        decimal_places=2,
+        max_digits=6,
+        blank=True,
+        null=True,
+        verbose_name='Sale price'
+    )
+    
 
     def __str__(self) -> str:
         return self.name
