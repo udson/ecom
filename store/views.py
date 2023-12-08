@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
+from .models import Product
 
 
 def home(request):
-    return render(request, 'store/home.html', {})
+    products = Product.objects.all()
+    return render(request, 'store/home.html', {'products': products})
