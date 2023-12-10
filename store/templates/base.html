@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>e-Com</title>
+    <title>{% block page_title %}e-Com{% endblock page_title %}</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
     <!-- Bootstrap icons -->
@@ -21,12 +21,20 @@
     <header class="bg-dark py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-          <h1 class="display-4 fw-bolder">Shop in style</h1>
-          <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+          <h1 class="display-4 fw-bolder">{% block header_title %}Shop in style{% endblock header_title %}</h1>
+          <p class="lead fw-normal text-white-50 mb-0">
+            {% block header_subtitle %}With this shop hompeage template{% endblock header_subtitle %}
+          </p>
         </div>
       </div>
     </header>
     <!-- Section -->
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
 		{% block content %}{% endblock content %}
     <!-- Footer -->
     <footer class="py-5 bg-dark">
