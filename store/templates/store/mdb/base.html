@@ -7,7 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>{% block title %}{% endblock title %}</title>
     <!-- MDB icon -->
-    <link rel="icon" href="{% static 'mdb-ui-kit/img/mdb-favicon.ico' %}" type="image/x-icon" />
+    <link rel="icon" href="{% static 'mdb-ui-kit/img/logo_icon.ico' %}" type="image/x-icon" />
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{% static 'mdb-ui-kit/css/mdb.min.css' %}" />
   </head>
   <body>
+    <header>
+      {% include 'store/mdb/navbar.html' %}
+    </header>
     <!-- content -->
     {% block content %}{% endblock content %}
     <!-- MDB -->
