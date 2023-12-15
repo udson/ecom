@@ -1,5 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from .models import Product
 
@@ -29,3 +31,6 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+def register_user(request, ):
+    return render(request, 'store/register.html', {})
