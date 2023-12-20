@@ -2,14 +2,18 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from .forms import SignUpForm
-from .models import Product
+from .models import Category, Product
 
 
 def home(request):
     products = Product.objects.all()
-    return render(request, 'store/home.html', {'products': products})
+    categories = Category.objects.all()[:5]
+    return render(
+        request, 'store/home.html',
+        {'products': products, 'categories': categories,}
+    )
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -53,3 +57,12 @@ def register_user(request, ):
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, 'store/product.html', {'product': product,})
+
+def category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    products = get_list_or_404(Product, category=category)
+    categories = Category.objects.all()[:5]
+    return render(
+        request, 'store/home.html',
+        {'products': products, 'categories': categories,}
+    )
