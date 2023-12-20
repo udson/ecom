@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import SignUpForm
 from .models import Product
 
@@ -49,3 +49,7 @@ def register_user(request, ):
             messages.error(request, 'There was an error registering you. Please try again.')
             return redirect('register')
     return render(request, 'store/register.html', {'form': form,})
+
+def product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'store/product.html', {'product': product,})
