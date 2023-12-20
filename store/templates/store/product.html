@@ -16,11 +16,22 @@
         {% endif %}
           <span>${{ product.price }}</span>
         </div>
-        {% for paragraph in product.description.splitlines %}
-        <p class="lead">
-          {{ paragraph }}
-        </p>  
-        {% endfor %}
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Product description</button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasRightLabel">Description</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            {% for paragraph in product.description.splitlines %}
+            <p>
+              {{ paragraph }}
+            </p>  
+            {% endfor %}
+          </div>
+        </div>
+        <br/><br/>
+        <br/><br/>
         <div class="d-flex">
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
           <button class="btn btn-outline-dark flex-shrink-0" type="button">
