@@ -17,24 +17,7 @@
   <body>
     <!-- Navigation -->
     {% include "navbar.html" %}
-    <!-- Header -->
-    <header class="bg-dark py-5">
-      <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-          <h1 class="display-4 fw-bolder">{% block header_title %}Shop in style{% endblock header_title %}</h1>
-          <p class="lead fw-normal text-white-50 mb-0">
-            {% block header_subtitle %}With this shop hompeage template{% endblock header_subtitle %}
-          </p>
-        </div>
-      </div>
-    </header>
     <!-- Section -->
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
 		{% block content %}{% endblock content %}
     <!-- Footer -->
     <footer class="py-5 bg-dark">
