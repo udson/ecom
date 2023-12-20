@@ -1,11 +1,12 @@
-import datetime
 from django.db import models
 
 
 class Category(models.Model):
     name = models.CharField(
-        max_length=50
+        max_length=50,
+        unique=True
     )
+    slug = models.SlugField()
 
     def __str__(self) -> str:
         return self.name
