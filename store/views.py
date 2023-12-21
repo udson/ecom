@@ -1,7 +1,5 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from .forms import SignUpForm
 from .models import Category, Product
@@ -19,6 +17,7 @@ def login_user(request):
     if request.user.is_authenticated:
         return redirect('store:home')
 
+    categories = Category.objects.all()[:5]
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -29,16 +28,17 @@ def login_user(request):
             return redirect('store:home')
         else:
             messages.error(request, message='Wrong username or password. Try again.')
-            return render(request, 'store/login.html', {})
+            return render(request, 'store/login.html', {'categories':categories,})
     else:
-        return render(request, 'store/login.html', {})
+        return render(request, 'store/login.html', {'categories':categories,})
 
 def logout_user(request):
     logout(request)
     return redirect('store:home')
 
-def register_user(request, ):
+def register_user(request):
     form = SignUpForm()
+    categories = Category.objects.all()[:5]
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -52,11 +52,12 @@ def register_user(request, ):
         else:
             messages.error(request, 'There was an error registering you. Please try again.')
             return redirect('store:register')
-    return render(request, 'store/register.html', {'form': form,})
+    return render(request, 'store/register.html', {'form': form, 'categories':categories,})
 
 def product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    return render(request, 'store/product.html', {'product': product,})
+    categories = Category.objects.all()[:5]
+    return render(request, 'store/product.html', {'product': product, 'categories':categories,})
 
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
