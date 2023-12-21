@@ -17,7 +17,7 @@ def home(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('store:home')
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -26,7 +26,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, message='Welcome!')
-            return redirect('home')
+            return redirect('store:home')
         else:
             messages.error(request, message='Wrong username or password. Try again.')
             return render(request, 'store/login.html', {})
@@ -35,7 +35,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('store:home')
 
 def register_user(request, ):
     form = SignUpForm()
@@ -48,10 +48,10 @@ def register_user(request, ):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, 'You have been registered! Welcome!')
-            return redirect('home')
+            return redirect('store:home')
         else:
             messages.error(request, 'There was an error registering you. Please try again.')
-            return redirect('register')
+            return redirect('store:register')
     return render(request, 'store/register.html', {'form': form,})
 
 def product(request, pk):
