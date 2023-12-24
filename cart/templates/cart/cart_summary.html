@@ -1,6 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  Cart Summary
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="row gx-4 gx-lg-5">
+      {% if cart_products %}
+      {% for product in cart_products %}
+        <div class="card mb-3">
+          <div class="row g-0 align-items-center">
+            <div class="col-md-2">
+              <img src="{{ product.image.url }}" class="rounded float-start" alt="..."  style="max-width: 100px;" />
+            </div>
+            <div class="col">
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <div class="fs-5 mb-5">
+                  {% if product.is_sale %}
+                    <span class="text-decoration-line-through">${{ product.sale_price }}</span>
+                  {% endif %}
+                    <span>${{ product.price }}</span>
+                </div>
+                <a href="#" class="btn btn-secondary" title="Remove from cart"><i class="bi-trash"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% else %}
+        <div class="row g-0 align-items-center">
+          <div class="col-md-2">
+            No items in the cart...
+          </div>
+        </div>
+      {% endif %}
+      </div>
+    </div>
+  </section>
+
 {% endblock content %}
   
