@@ -5,11 +5,11 @@
     <div class="container px-4 px-lg-5 my-5">
       <div class="row gx-4 gx-lg-5">
       {% if cart_products %}
-      {% for product in cart_products %}
+      {% for product, quantity in cart_products.items %}
         <div class="card mb-3">
           <div class="row g-0 align-items-center">
             <div class="col-md-2">
-              <img src="{{ product.image.url }}" class="rounded float-start" alt="..."  style="max-width: 100px;" />
+              <img src="{{ product.image.url }}" class="rounded float-start" alt="{{ product.name }}"  style="max-width: 100px;" />
             </div>
             <div class="col">
               <div class="card-body">
@@ -20,7 +20,15 @@
                   {% endif %}
                     <span>${{ product.price }}</span>
                 </div>
-                <a href="#" class="btn btn-secondary" title="Remove from cart"><i class="bi-trash"></i></a>
+                <div class="row">
+                  <div class="col ">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="{{ quantity }}" style="max-width: 3rem" />
+                  </div>
+                  <div class="col ">
+                    <a href="#" class="btn btn-secondary" title="Remove from cart"><i class="bi-trash"></i></a>
+                  </div>
+                  
+                </div>
               </div>
             </div>
           </div>

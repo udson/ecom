@@ -12,12 +12,13 @@ class Cart():
     
     self.cart = cart
   
-  def add(self, product):
+  def add(self, product, quantity):
     product_id = str(product.id)
+    quantity = quantity
     if product_id in self.cart:
       pass
     else:
-      self.cart[product_id] = {'price': str(product.price)}
+      self.cart[product_id] = quantity
     
     self.session.modified = True
   
@@ -25,6 +26,8 @@ class Cart():
     return len(self.cart)
   
   def get_prods(self):
-    products_ids = self.cart.keys()
-    
-    return Product.objects.filter(id__in=products_ids)
+    return {Product.objects.get(pk=k): self.cart[k] for k in self.cart.keys()}
+     
+  
+  def get_quantities(self):
+    return self.cart
